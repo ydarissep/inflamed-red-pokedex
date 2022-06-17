@@ -1,0 +1,191 @@
+* {
+	font-family: sans-serif;
+}
+
+body {
+    background: #232529;
+    color: white;
+    margin: 0;
+}
+
+footer > p {
+    text-align: center;
+}
+
+#tableButton, #tableInput {
+    text-align: center;
+}
+
+
+.hide, .hideTemp {
+	display: none !important
+}
+
+
+
+button[type='button'] {
+  background: rgba(215, 212, 231, 0.075);
+  border: none;
+  outline: none;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 3px;
+}
+
+button[type='button']:hover {
+  background: rgba(215, 212, 231, 0.3);
+}
+
+.activeButton {
+  background: rgba(215, 212, 231, 0.4) !important;
+}
+
+
+th {
+	cursor: pointer;
+    background: rgba(215, 212, 231, 0.075); 
+    color: white; 
+    font-weight: bold; 
+    padding: 0.5rem 0.5rem;
+}
+
+.th-sort-asc::after {
+  content: "\25b4";
+}
+
+.th-sort-desc::after {
+  content: "\25be";
+}
+
+.th-sort-asc,
+.th-sort-desc {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+h1, td, th {
+	text-align: center;
+}
+
+tr, th {
+  transition: background 0.2s ease-in-out;
+}
+
+tr:nth-of-type(odd) {  
+  background: #7f85a01a; 
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.226);
+  box-sizing: border-box;
+  background: none;
+  color: white;
+  transition: background 0.2s ease-in-out;
+  font-weight: 600;
+  width: 300px;
+}
+
+@media 
+only screen and (max-width: 350px) {
+    input {
+        width: 200px;
+    }
+}
+
+input:focus, input:hover {
+  background: rgba(255, 255, 255, 0.144);
+}
+
+canvas {
+  padding: 0.5rem;
+}
+
+@media (hover: hover) {
+    thead th:hover {
+        background: rgba(113, 117, 126, 0.336);
+    }
+    #speciesTableTbody tr:hover {
+        background-color: rgba(129, 135, 156, 0.301);
+        cursor: pointer;
+    }
+    .topButton:hover {
+        background: salmon;
+        cursor: pointer;
+    }
+}
+
+.topButton {
+  font-family: monospace;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  background: red;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: 0.2s ease-in-out;
+  filter: opacity(100%);
+}
+
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 15px 0 rgba(27, 27, 27, 0.568);
+}
+
+td, th {
+    border: 1px solid rgba(255, 255, 255, 0.048);
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 4rem;
+    height: 23px;
+    border-radius: 5px;
+    font-weight: bold;
+    padding-bottom: 2px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    text-shadow: 1px 1px rgba(54, 61, 61, 0.788);
+}
+
+.TYPE_NORMAL {background: #A8A77A;}
+.TYPE_FIRE {background: #EE8130;}
+.TYPE_WATER {background: #6390F0;}
+.TYPE_ELECTRIC {background: #cf9a09;}
+.TYPE_GRASS {background: #62a13d;}
+.TYPE_ICE {background: #65a19e;}
+.TYPE_FIGHTING {background: #C22E28;}
+.TYPE_POISON {background: #A33EA1;}
+.TYPE_GROUND {background: #b1954f;}
+.TYPE_FLYING {background: #8571be;}
+.TYPE_PSYCHIC {background: #F95587;}
+.TYPE_BUG {background: #808f13;}
+.TYPE_ROCK {background: #B6A136;}
+.TYPE_GHOST {background: #735797;}
+.TYPE_DRAGON {background: #6F35FC;}
+.TYPE_DARK {background: #705746;}
+.TYPE_STEEL {background: #8c8c9e;}
+.TYPE_FAIRY {background: #D685AD;}
+
+
+.Physical {filter: brightness(200%);}
+.Special {filter: brightness(200%);}
+.Status {filter: brightness(300%);}
+
+
+.splitIcon {width: 40px;}

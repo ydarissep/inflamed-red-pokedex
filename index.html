@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IE Dex</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style/speciesTable.css">
+  <link rel="stylesheet" href="style/abilitiesTable.css">
+  <link rel="stylesheet" href="style/movesTable.css">
+</head>
+<body>
+
+  <div id="tableInput">
+    <input type="search" id="speciesInput" class="hide">
+    <input type="search" id="abilitiesInput" class="hide">
+    <input type="search" id="movesInput" class="hide">
+  </div>
+
+
+  <div id="tableButton">
+    <button type="button" id="abilitiesButton" class="hide">Abilities</button>
+    <button type="button" id="speciesButton" class="hide">Species</button>
+    <button type="button" id="movesButton" class="hide">Moves</button>
+  </div>
+
+  <table id="abilitiesTable" class="hide">
+    <thead id="abilitiesTableThead">
+      <tr>
+        <th class="ability">Name</th>
+        <th class="description">Description</th>
+      </tr>
+    </thead>
+    <tbody id="abilitiesTableTbody"></tbody>
+  </table>
+
+
+  <table id="movesTable" class="hide">
+    <thead id="movesTableThead">
+      <tr>
+        <th class="move">Name</th>
+        <th class="type">Type</th>
+        <th class="split">Split</th>
+        <th class="power">Power</th>
+        <th class="accuracy">Acc</th>
+        <th class="PP">PP</th>
+        <th class="effect">Effect</th>
+      </tr>
+    </thead>
+    <tbody id="movesTableTbody"></tbody>    
+  </table>
+
+
+  <table id="speciesTable" class="hide">
+    <thead id="speciesTableThead">
+      <tr>
+        <th class="ID">ID</th>
+        <th class="sprite">Sprite</th>
+        <th class="species" colspan="2">Name</th>
+        <th class="types">Types</th>
+        <th class="abilities">Abilities</th>
+        <th class="baseHP">HP</th>
+        <th class="baseAttack">Atk</th>
+        <th class="baseDefense">Def</th>
+        <th class="baseSpAttack">SpA</th>
+        <th class="baseSpDefense">SpD</th>
+        <th class="baseSpeed">Spe</th>
+        <th class="BST">BST</th>
+      </tr>
+    </thead>
+    <tbody id="speciesTableTbody"></tbody>
+  </table>
+
+
+  <a class="topButton hide">↑</a>
+</body>
+
+
+<footer id="footer">
+  <h1>Inclement Emerald<br>Pokedex</h1>
+  <script defer src="src/species/displaySpecies.js"></script>
+  <script defer src="src/species/fetchSpecies.js"></script>
+  <script defer src="src/species/regexSpecies.js"></script>
+  <script defer src="src/abilities/displayAbilities.js"></script>
+  <script defer src="src/abilities/fetchAbilities.js"></script>
+  <script defer src="src/abilities/regexAbilities.js"></script>
+  <script defer src="src/moves/displayMoves.js"></script>
+  <script defer src="src/moves/fetchMoves.js"></script>
+  <script defer src="src/moves/regexMoves.js"></script>
+  <script defer src="src/lz-string.js"></script>
+  <script defer src="src/utility.js"></script>
+  <script defer src="src/global.js"></script>
+</footer>
+</html>
