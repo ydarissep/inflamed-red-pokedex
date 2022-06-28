@@ -1,0 +1,11 @@
+#abilitiesButton {
+	width: 100px;
+}
+
+#abilitiesTableThead th.ability {
+	width: 250px;
+}
+
+#abilitiesTableThead th.description {
+	width: 400px;
+}
