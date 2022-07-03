@@ -78,6 +78,12 @@ async function getSprite(species){
     return regexSprite(textSprite, species)
 }
 
+async function getReplaceAbilities(species){
+    const rawReplaceAbilities = await fetch(`https://raw.githubusercontent.com/${repo1}/master/src/Tables/replace_abilities.h`)
+    const textReplaceAbilities = await rawReplaceAbilities.text()
+
+    return regexReplaceAbilities(textReplaceAbilities, species)
+}
 
 
 
@@ -97,11 +103,46 @@ async function buildSpeciesObj(){
     species = await getTMHMLearnsets(species)
     species = await getEggMovesLearnsets(species)
     species = await getTutorLearnsets(species)
+    species = await getReplaceAbilities(species)
     species = await getSprite(species)
+
+
+
+
+
+    species = await altFormsLearnsets(species, "forms", "tutorLearnsets")
+    species = await altFormsLearnsets(species, "forms", "TMHMLearnsets")
+
 
     delete species["SPECIES_ZYGARDE_CORE"]
     delete species["SPECIES_ZYGARDE_CELL"]
     delete species["SPECIES_SHADOW_WARRIOR"]
+
+    Object.keys(species).forEach(name => {
+        species[name]["tutorLearnsets"].sort((a,b) => a[1] - b[1])
+        species[name]["TMHMLearnsets"].sort(function(a,b) {
+            a = parseInt(a[1].match(/\d+/)[0])
+            b = parseInt(b[1].match(/\d+/)[0])
+
+            return a - b
+        })
+        species[name]["TMHMLearnsets"].sort(function(a,b) {
+            if(a[1].includes("TM")){
+                a = 1
+            }
+            else{
+                a = 2
+            }
+            if(b[1].includes("TM")){
+                b = 1
+            }
+            else{
+                b = 2
+            }
+
+            return a - b
+        })
+    })
 
     await localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
     return species

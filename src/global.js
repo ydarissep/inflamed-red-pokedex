@@ -7,6 +7,14 @@ const tableFilter = document.getElementById("tableFilter")
 const speciesFilterCheckbox = document.getElementById("speciesFilterCheckbox")
 const movesFilterCheckbox = document.getElementById("movesFilterCheckbox")
 
+
+
+const openCredits = document.getElementById("openCredits")
+const closeCredits = document.getElementById("closeCredits")
+const modal = document.getElementById("modal")
+
+
+
 const speciesFilterHP = document.getElementById("speciesFilterHP")
 const speciesFilterAtk = document.getElementById("speciesFilterAtk")
 const speciesFilterDef = document.getElementById("speciesFilterDef")
@@ -23,6 +31,7 @@ const movesFilterMaxPower = document.getElementById("movesFilterMaxPower")
 const movesFilterFlag = document.getElementById("movesFilterFlag")
 const movesFilterPriority = document.getElementById("movesFilterPriority")
 const movesFilterTarget = document.getElementById("movesFilterTarget")
+const movesFilterPower = document.getElementById("movesFilterPower")
 
 
 
@@ -364,6 +373,10 @@ movesFilterTarget.addEventListener("click", () => {
     const list = createOptionArray(["target"], moves)
     createFilter(list, moves, ["target"], filterCount++, movesFilterButton, "Target")
 })
+movesFilterPower.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, moves, ["power"], filterCount++, movesFilterButton, "Power", isInt = true, isOperator = true)
+})
 
 
 
@@ -375,14 +388,22 @@ movesFilterTarget.addEventListener("click", () => {
 
 
 
+openCredits.addEventListener("click", () => {
+    modal.classList.remove("hide")
+    if(typeof document.createElement('dialog').showModal === 'function'){
+        modal.showModal()
+    }
+    else if(typeof document.createElement('dialog').show === 'function'){
+        modal.show()
+    }
 
-
-
-
-
-
-
-
+})
+closeCredits.addEventListener("click", () => {
+    modal.classList.add("hide")
+    if(typeof document.createElement('dialog').close === 'function'){
+        modal.close()
+    }
+})
 
 
 

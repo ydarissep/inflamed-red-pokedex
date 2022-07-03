@@ -145,3 +145,48 @@ function regexAbilitiesDescription(textAbilitiesDescription, abilities){
 
     return abilities
 }
+
+
+
+
+function regexNewAbilities(textNewAbilities, abilities){
+    const lines = textNewAbilities.split("\n")
+    let speciesName = "", ability = "", replaceAbility = ""
+
+    lines.forEach(line => {
+        if(line.includes("{")){
+            speciesName = ""
+            ability = ""
+            replaceAbility = ""
+        }
+        const matchSpecies = line.match(/SPECIES_\w+/i)
+        if(matchSpecies !== null){
+            speciesName = matchSpecies[0]
+        }
+        const matchAbility = line.match(/ABILITY_\w+/i)
+        if(matchAbility !== null){
+            ability = matchAbility[0]
+        }
+        const matchReplaceAbility = line.match(/NAME_\w+/i)
+        if(matchReplaceAbility !== null){
+            replaceAbility = matchReplaceAbility[0].replace("NAME_", "ABILITY_")
+        }
+
+        if(speciesName !== "" && ability !== "" && replaceAbility !== ""){
+            if(abilities[replaceAbility] == undefined){
+                abilities[replaceAbility] = {}
+                abilities[replaceAbility]["description"] = abilities[ability]["description"]
+                abilities[replaceAbility]["ingameName"] = sanitizeString(replaceAbility)
+                abilities[replaceAbility]["name"] = replaceAbility
+            }
+            /*
+            for (let i = 0; i < species[speciesName]["abilities"].length; i++){
+                if(species[speciesName]["abilities"][i] === ability){
+                    species[speciesName]["abilities"][i] = replaceAbility
+                }
+            }
+            */
+        }
+    })
+    return abilities
+}

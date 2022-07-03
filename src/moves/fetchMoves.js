@@ -23,7 +23,7 @@ async function getMovesIngameName(moves){
 }
 
 async function getVanillaMovesDescription(moves){
-    const rawVanillaMovesDescription = await fetch("https://raw.githubusercontent.com/Greenphx9/pokefirered/master/src/move_descriptions.c")
+    const rawVanillaMovesDescription = await fetch("https://raw.githubusercontent.com/ProfLeonDias/pokefirered/decapitalization/src/move_descriptions.c")
     const textVanillaMovesDescription = await rawVanillaMovesDescription.text()
 
     return regexVanillaMovesDescription(textVanillaMovesDescription, moves)

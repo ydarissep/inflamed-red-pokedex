@@ -5,6 +5,7 @@ function displaySpecies(){
     for (let i = 0; i < speciesArray.length; i++){
         const speciesName = speciesArray[i]
         let row = document.createElement("tr")
+        row.setAttribute("id", `${speciesName}`)
         tBody.append(row)
 
         if(i >= 75)
@@ -99,6 +100,11 @@ function displaySpecies(){
         row.append(createBaseStatsContainer("Spe", "baseSpeed", speciesObj))
 
         row.append(createBaseStatsContainer("BST", "BST", speciesObj))
+
+        row.addEventListener("click", () => {
+            createSpeciesPanel(speciesName)
+            window.scrollTo(0, 0);
+        })
     }
 }
 

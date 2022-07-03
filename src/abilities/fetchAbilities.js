@@ -8,7 +8,7 @@ async function getAbilities(abilities){
 
 
 async function getVanillaAbilitiesDescription(abilities){
-    const rawVanillaAbilitiesDescription = await fetch("https://raw.githubusercontent.com/Greenphx9/pokefirered/master/src/data/text/abilities.h")
+    const rawVanillaAbilitiesDescription = await fetch("https://raw.githubusercontent.com/ProfLeonDias/pokefirered/decapitalization/src/data/text/abilities.h")
     const textVanillaAbilitiesDescription = await rawVanillaAbilitiesDescription.text()
 
     return regexVanillaAbilitiesDescription(textVanillaAbilitiesDescription, abilities)
@@ -30,12 +30,21 @@ async function getAbilitiesDescription(abilities){
     return regexAbilitiesDescription(textAbilitiesDescription, abilities)
 }
 
+async function getNewAbilities(abilities){
+    const rawNewAbilities = await fetch(`https://raw.githubusercontent.com/${repo1}/master/src/Tables/replace_abilities.h`)
+    const textNewAbilities = await rawNewAbilities.text()
+
+    return regexNewAbilities(textNewAbilities, abilities)   
+}
+
 async function buildAbilitiesObj(){
     let abilities = {}
     abilities = await getAbilities(abilities) 
     abilities = await getVanillaAbilitiesDescription(abilities)
     abilities = await getAbilitiesIngameName(abilities)
     abilities = await getAbilitiesDescription(abilities)
+    abilities = await getNewAbilities(abilities)
+
     abilities["ABILITY_NEUTRALIZINGGAS"]["description"] = "All Abilities are nullified."
     abilities["ABILITY_WANDERING_SPIRIT"]["description"] = "Trades Abilities on contact."
     abilities["ABILITY_PERISH_BODY"]["description"] = "Gives a perish count on contact."
