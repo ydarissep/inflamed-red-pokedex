@@ -146,7 +146,7 @@ function regexMoves(textMoves, moves){
                 if(priority >= 50)
                     priority -= 256
 
-                moves[move] = setMove(moves[move], change, "priority", priority)
+                moves[move] = setMove(moves[move], change, "priority", `${priority}`)
             }
         }
         else if(line.includes(".z_move_power")){
