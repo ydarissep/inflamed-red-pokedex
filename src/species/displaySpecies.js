@@ -55,12 +55,12 @@ function displaySpecies(){
         let type1 = document.createElement("div")
         let type2 = document.createElement("div")
         typesContainer.className = "types"
-        type1.innerText = sanitizeString(species[speciesName]["type1"])
+        type1.innerText = `${sanitizeString(species[speciesName]["type1"])} `
         type2.innerText = sanitizeString(species[speciesName]["type2"])
         type1.className = `${species[speciesName]["type1"]} background`
         type2.className = `${species[speciesName]["type2"]} background`
         types.append(type1)
-        if(type1.innerText !== type2.innerText)
+        if(species[speciesName]["type1"] !== species[speciesName]["type2"])
             types.append(type2)
         typesContainer.append(types)
         row.append(typesContainer)

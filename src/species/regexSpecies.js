@@ -75,10 +75,12 @@ function regexBaseStats(textBaseStats, species){
                 if(change === true)
                     species[name]["changes"].push([match, value])
                 else if(change === false){
-                    if(match === "ability1" || match === "ability2" || match === "hiddenAbility")
+                    if(match === "ability1" || match === "ability2" || match === "hiddenAbility"){
                         species[name]["abilities"].push(value)
-                    else
+                    }
+                    else{
                         species[name][match] = value
+                    }
                 }
             }
         }

@@ -14,6 +14,7 @@ const movesFilterCheckbox = document.getElementById("movesFilterCheckbox")
 const openCredits = document.getElementById("openCredits")
 const closeCredits = document.getElementById("closeCredits")
 const modal = document.getElementById("modal")
+const update = document.getElementById("update")
 
 
 
@@ -493,6 +494,11 @@ utilityButton.onclick = () => {
     }
 }
 
+
+update.addEventListener("click", () => {
+    localStorage.clear()
+    window.location.reload()
+})
 
 
 window.onbeforeunload = () => {  
