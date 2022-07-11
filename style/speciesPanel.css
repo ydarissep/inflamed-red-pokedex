@@ -41,7 +41,7 @@
 	font-size: 11pt;
 }
 
-#speciesPanelSubcontainer2 {
+#speciesPanelSubcontainer2, #speciesEvolutionsMainContainer {
 	padding: 15px 0px 0px 0px;
 }
 
@@ -54,11 +54,29 @@
 }
 
 #speciesEggGroupsContainer, #speciesHeldItemsContainer, #speciesChangesContainer {
-	width: 33.33%;
+	flex: 1;
 }
 
 #speciesEggGroups, #speciesHeldItems, #speciesChanges {
 	font-size: 15px;
+	width: max-content;
+}
+
+.nerf {
+	color: #ef5350;
+}
+
+.buff {
+	color: #64dd17;
+}
+
+.changeTextAlignFlex {
+	flex: 1;
+	text-align: right;
+}
+
+.speciesPanelStatPadding {
+	padding-right: 15px;
 }
 
 .evoMethod {
@@ -122,7 +140,7 @@
 
 
 
-#statsNames p > span {
+.statsGraphHeader {
   font-weight: 800;
 }
 
@@ -138,6 +156,11 @@
   margin: 0.4rem 0;
   filter: opacity(90%);
   border-radius: 3px;
+}
+
+
+#statsNames p:last-child, #statsGraph div:last-child {
+  transform: translateY(15px);
 }
 
 
