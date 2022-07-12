@@ -32,6 +32,7 @@ async function fetchData(){
 
 
     await displaySetup()
+    await window.scrollTo(0, 0)
 }
 
 
