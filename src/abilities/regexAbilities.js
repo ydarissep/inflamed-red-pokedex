@@ -176,7 +176,7 @@ function regexNewAbilities(textNewAbilities, abilities){
             if(abilities[replaceAbility] == undefined){
                 abilities[replaceAbility] = {}
                 abilities[replaceAbility]["description"] = abilities[ability]["description"]
-                abilities[replaceAbility]["ingameName"] = sanitizeString(replaceAbility)
+                abilities[replaceAbility]["ingameName"] = sanitizeString(replaceAbilityString(replaceAbility))
                 abilities[replaceAbility]["name"] = replaceAbility
             }
             /*
@@ -189,4 +189,22 @@ function regexNewAbilities(textNewAbilities, abilities){
         }
     })
     return abilities
+}
+
+
+
+
+
+
+
+function replaceAbilityString(ability){
+    const replaceStringObject = {
+        "test": "test",
+    }
+    if(ability in replaceStringObject){
+        return replaceStringObject[ability]
+    }
+    else{
+        return ability
+    }
 }
