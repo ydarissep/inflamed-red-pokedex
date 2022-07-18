@@ -116,7 +116,7 @@ async function cleanSpecies(species){
                 }
             }
         }
-        if(name.match(/_GIGA$/i) !== null && species[name]["evolution"].toString().includes("EVO_MEGA")){
+        else if(name.match(/_GIGA$/i) !== null && species[name]["evolution"].toString().includes("EVO_MEGA")){
             const replaceName = name.replace(/_GIGA$/i, "_MEGA")
             species[name]["name"] = replaceName
             species[name]["changes"] = []
@@ -141,7 +141,7 @@ async function cleanSpecies(species){
             species[replaceName] = species[name]
             delete species[name]
         }
-        else if(name.match(/_MEGA$|_MEGA_Y$|MEGA_X$/i) !== null && species[name]["evolution"].toString().includes("EVO_MEGA")){
+        else if(name.match(/_MEGA$|_MEGA_Y$|_MEGA_X$|_GIGA$/i) !== null){
             species[name]["evolution"] = []
         }
     })
