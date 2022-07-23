@@ -32,7 +32,9 @@ async function fetchData(){
     await fetchTypeChart()
 
 
+    await setDataList()
     await displaySetup()
+
     await window.scrollTo(0, 0)
 }
 
@@ -67,4 +69,34 @@ function footerP(input){
     const footer = document.getElementById("footer")
     paragraph.innerText = input
     footer.append(paragraph)
+}
+
+
+
+
+
+function setDataList(){
+    window.speciesIngameNameArray = []
+    Object.keys(species).forEach(speciesName => {
+        const option = document.createElement("option")
+        option.innerText = sanitizeString(speciesName)
+        speciesIngameNameArray.push(option.innerText)
+        speciesInputDataList.append(option)
+    })
+
+    window.abilitiesIngameNameArray = []
+    Object.keys(abilities).forEach(abilityName => {
+        const option = document.createElement("option")
+        option.innerText = abilities[abilityName]["ingameName"]
+        abilitiesIngameNameArray.push(option.innerText)
+        abilitiesInputDataList.append(option)
+    })
+
+    window.movesIngameNameArray = []
+    Object.keys(moves).forEach(movesName => {
+        const option = document.createElement("option")
+        option.innerText = moves[movesName]["ingameName"]
+        movesIngameNameArray.push(option.innerText)
+        movesInputDataList.append(option)
+    })
 }

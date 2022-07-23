@@ -199,7 +199,7 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
         const button = document.createElement("button")
 
         filter.setAttribute("id", `filter${filterCount}`)
-        filter.className = "flex"
+        filter.className = "flex tableFilter"
 
         label.setAttribute("for", `input${filterCount}`)
         label.className = "filterLabel"
@@ -319,7 +319,7 @@ function filterInput(value, objInputArray, rows, filterCount, obj, isInt = false
             }
             else{
                 compareValue = JSON.stringify(compareValue).toLowerCase()
-                if(compareValue.includes(value.replace(/ /g, "_"))){
+                if(compareValue.includes(value.replace(/ /g, "_")) || compareValue.includes(value.replace(/ /g, ""))){
                     hideRows[j] = "show"
                     break
                 }
