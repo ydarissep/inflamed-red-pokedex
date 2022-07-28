@@ -309,14 +309,14 @@ onlyShowChangedPokemonCheckbox.addEventListener("change", e => {
         const row = document.getElementById(name)
         if(e.target.checked){
             if(species[name]["changes"].length <= 0){
-                row.classList.add("hide")
+                row.classList.add("hideChanged")
             }
             else{
-                row.classList.remove("hide")
+                row.classList.remove("hideChanged")
             }
         }
         else{
-            row.classList.remove("hide")
+            row.classList.remove("hideChanged")
         }
     })
     lazyLoading(reset = true)
