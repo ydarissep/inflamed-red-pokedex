@@ -178,11 +178,14 @@ async function buildSpeciesObj(){
     species = await getSprite(species)
 
 
-    species = await cleanSpecies(species)
+
 
 
     species = await altFormsLearnsets(species, "forms", "tutorLearnsets")
     species = await altFormsLearnsets(species, "forms", "TMHMLearnsets")
+
+
+    species = await cleanSpecies(species)
 
 
     delete species["SPECIES_ZYGARDE_CORE"]

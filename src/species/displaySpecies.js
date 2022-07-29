@@ -141,7 +141,7 @@ function displaySpecies(){
 
         row.addEventListener("click", () => {
             createSpeciesPanel(speciesName)
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 0)
         })
     }
 }
