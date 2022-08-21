@@ -180,7 +180,9 @@ function regexLevelUpLearnsets(textLevelUpLearnsets, conversionTable, species){
         const matchConversion = line.match(/s\w+LevelUpLearnset/i)
         if(matchConversion !== null){
             const index = matchConversion[0]
-            speciesArray = conversionTable[index]
+            if(index in conversionTable){
+                speciesArray = conversionTable[index]
+            }
         }
 
 
