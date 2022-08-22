@@ -29,11 +29,21 @@ async function getVanillaMovesDescription(moves){
     return regexVanillaMovesDescription(textVanillaMovesDescription, moves)
 }
 
+async function getFlags(moves){
+    footerP("Fetching moves flags")
+    const rawMovesFlags = await fetch(`https://raw.githubusercontent.com/${repo1}/master/assembly/data/move_tables.json`)
+    const textMovesFlags = await rawMovesFlags.text()
+    const JSONMovesFlags = await JSON.parse(textMovesFlags)
+
+    return regexMovesFlags(JSONMovesFlags, moves)
+}
+
 
 
 async function buildMovesObj(){
     let moves = {}
     moves = await getMoves(moves)
+    moves = await getFlags(moves)
     moves = await getVanillaMovesDescription(moves)
     moves = await getMovesDescription(moves)
     moves = await getMovesIngameName(moves)
