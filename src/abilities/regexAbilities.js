@@ -118,28 +118,41 @@ function regexAbilitiesIngameName(textAbilitiesIngameName, abilities){
 
 function regexAbilitiesDescription(textAbilitiesDescription, abilities){
     const lines = textAbilitiesDescription.split("\n")
+    window.replaceAbilities = {}
     let abilityArray = []
 
     lines.forEach(line => {
         if(!line.includes("#ifdef")){
+            let ability = "", abilitySanitized = ""
 
-        let ability = "", abilitySanitized = ""
+            const matchAbility = line.match(/DESC_(\w+)/i)
+            if(matchAbility !== null){
+                ability = `ABILITY_${matchAbility[1]}`
+                abilitySanitized = `ABILITY_${matchAbility[1].replace(/_/g, "")}`
+            }
+            else{
+                for (let i = 0; i < abilityArray.length; i++){
+                    if(abilityArray[i] in abilities){
+                        abilities[abilityArray[i]]["description"] = line.trim()
+                    }
+                    else if(abilityArray[i] in replaceAbilities){
+                        replaceAbilities[abilityArray[i]]["description"] = line.trim()   
+                    }
+                }
+                abilityArray = []
+            }
 
-        const matchAbility = line.match(/DESC_(\w+)/i)
-        if(matchAbility !== null){
-            ability = `ABILITY_${matchAbility[1]}`
-            abilitySanitized = `ABILITY_${matchAbility[1].replace(/_/g, "")}`
-        }
-        else{
-            for (let i = 0; i < abilityArray.length; i++)
-                abilities[abilityArray[i]]["description"] = line.trim()
-            abilityArray = []
-        }
-
-        if(abilities[ability] !== undefined)
-            abilityArray.push(ability)
-        else if(abilities[abilitySanitized] !== undefined)
-            abilityArray.push(abilitySanitized)
+            if(abilities[ability] !== undefined)
+                abilityArray.push(ability)
+            else if(abilities[abilitySanitized] !== undefined)
+                abilityArray.push(abilitySanitized)
+            else if(/DESC_/i.test(line)){
+                replaceAbilities[ability] = {}
+                replaceAbilities[ability]["name"] = ability
+                replaceAbilities[ability]["ingameName"] = sanitizeString(ability)
+                replaceAbilities[ability]["description"] = ""
+                abilityArray.push(ability)
+            }
         }
     })
 
@@ -151,13 +164,14 @@ function regexAbilitiesDescription(textAbilitiesDescription, abilities){
 
 function regexNewAbilities(textNewAbilities, abilities){
     const lines = textNewAbilities.split("\n")
-    let speciesName = "", ability = "", replaceAbility = ""
+    let speciesName = "", ability = "", replaceAbility = "", replaceDescription = ""
 
     lines.forEach(line => {
         if(line.includes("{")){
             speciesName = ""
             ability = ""
             replaceAbility = ""
+            replaceDescription = ""
         }
         const matchSpecies = line.match(/SPECIES_\w+/i)
         if(matchSpecies !== null){
@@ -170,6 +184,15 @@ function regexNewAbilities(textNewAbilities, abilities){
         const matchReplaceAbility = line.match(/NAME_\w+/i)
         if(matchReplaceAbility !== null){
             replaceAbility = matchReplaceAbility[0].replace("NAME_", "ABILITY_")
+        }
+        const matchReplaceDescription = line.match(/DESC_\w+/i)
+        if(matchReplaceDescription !== null){
+            replaceDescription = matchReplaceDescription[0].replace("DESC_", "ABILITY_")
+
+            if(replaceDescription in replaceAbilities){
+                abilities[replaceDescription] = replaceAbilities[replaceDescription]
+            }
+
         }
 
         if(speciesName !== "" && ability !== "" && replaceAbility !== ""){
@@ -188,6 +211,8 @@ function regexNewAbilities(textNewAbilities, abilities){
             */
         }
     })
+
+    delete replaceAbilities
     return abilities
 }
 
