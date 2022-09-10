@@ -216,15 +216,7 @@ async function buildSpeciesObj(){
 
             return a - b
         })
-
-        global.max = 0, species = "", total = 0
-        total = species[name]["baseSpAttack"] + species[name]["baseAttack"]
-        if(total > max){
-            species = name
-            max = total
-        }
     })
-    console.log(species, max)
 
     await localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
     return species
