@@ -133,10 +133,10 @@ function regexAbilitiesDescription(textAbilitiesDescription, abilities){
             else{
                 for (let i = 0; i < abilityArray.length; i++){
                     if(abilityArray[i] in abilities){
-                        abilities[abilityArray[i]]["description"] = line.trim()
+                        abilities[abilityArray[i]]["description"] = line.trim().replaceAll("\\n", "")
                     }
                     else if(abilityArray[i] in replaceAbilities){
-                        replaceAbilities[abilityArray[i]]["description"] = line.trim()   
+                        replaceAbilities[abilityArray[i]]["description"] = line.trim().replaceAll("\\n", "")
                     }
                 }
                 abilityArray = []
