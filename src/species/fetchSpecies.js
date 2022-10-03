@@ -185,8 +185,6 @@ async function buildSpeciesObj(){
     species = await altFormsLearnsets(species, "forms", "TMHMLearnsets")
 
 
-    species = await cleanSpecies(species)
-
 
     delete species["SPECIES_ZYGARDE_CORE"]
     delete species["SPECIES_ZYGARDE_CELL"]

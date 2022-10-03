@@ -30,6 +30,7 @@ const speciesFilterSpD = document.getElementById("speciesFilterSpD")
 const speciesFilterSpe = document.getElementById("speciesFilterSpe")
 const speciesFilterBST = document.getElementById("speciesFilterBST")
 
+const locationsFilterType = document.getElementById("locationsFilterType")
 
 const movesFilterType = document.getElementById("movesFilterType")
 const movesFilterFlag = document.getElementById("movesFilterFlag")
@@ -56,6 +57,13 @@ const abilitiesButton = document.getElementById("abilitiesButton")
 const abilitiesTable = document.getElementById("abilitiesTable")
 const abilitiesTableThead = document.getElementById("abilitiesTableThead")
 const abilitiesTableTbody = document.getElementById("abilitiesTableTbody")
+
+
+const locationsInput = document.getElementById("locationsInput")
+const locationsButton = document.getElementById("locationsButton")
+const locationsTable = document.getElementById("locationsTable")
+const locationsTableThead = document.getElementById("locationsTableThead")
+const locationsTableTbody = document.getElementById("locationsTableTbody")
 
 
 const movesInput = document.getElementById("movesInput")
@@ -96,6 +104,12 @@ const headerSpeciesSpA = document.querySelector("#speciesTableThead th.baseSpAtt
 const headerSpeciesSpD = document.querySelector("#speciesTableThead th.baseSpDefense")
 const headerSpeciesSpe = document.querySelector("#speciesTableThead th.baseSpeed")
 const headerSpeciesBST = document.querySelector("#speciesTableThead th.BST")
+
+const headerLocationsSprite = document.querySelector("#locationsTableThead th.sprite")
+const headerLocationsSpecies = document.querySelector("#locationsTableThead th.species")
+const headerLocationsRarity = document.querySelector("#locationsTableThead th.rarity")
+const headerLocationsZone = document.querySelector("#locationsTableThead th.zone")
+
 const utilityButton = document.querySelector('.utilityButton')
 
 
@@ -245,6 +259,36 @@ headerSpeciesBST.addEventListener("click", () => {
 
 
 
+headerLocationsSprite.addEventListener("click", () => {
+    if(headerLocationsSprite.classList.contains("th-sort-desc"))
+        sortTableByClassName(locationsTable, "species", asc = true, parseINT = false)
+    else
+        sortTableByClassName(locationsTable, "species", asc = false, parseINT = false)
+})
+headerLocationsSpecies.addEventListener("click", () => {
+    if(headerLocationsSpecies.classList.contains("th-sort-desc"))
+        sortTableByClassName(locationsTable, "species", asc = true, parseINT = false)
+    else
+        sortTableByClassName(locationsTable, "species", asc = false, parseINT = false)
+})
+headerLocationsRarity.addEventListener("click", () => {
+    if(headerLocationsRarity.classList.contains("th-sort-desc"))
+        sortTableByClassName(locationsTable, "rarity", asc = true, parseINT = true)
+    else
+        sortTableByClassName(locationsTable, "rarity", asc = false, parseINT = true)
+})
+headerLocationsZone.addEventListener("click", () => {
+    if(headerLocationsZone.classList.contains("th-sort-desc"))
+        sortTableByClassName(locationsTable, "zone", asc = true, parseINT = false)
+    else
+        sortTableByClassName(locationsTable, "zone", asc = false, parseINT = false)
+})
+
+
+
+
+
+
 
 speciesInput.addEventListener("input", e => {
     const value = e.target.value
@@ -259,6 +303,14 @@ abilitiesInput.addEventListener("input", e => {
         abilitiesInput.blur()
     }
     filterTableInput(value, [0, 1], abilitiesTableTbody)
+})
+locationsInput.addEventListener("input", e => {
+    const value = e.target.value
+    if(speciesIngameNameArray.includes(value)){
+        locationsInput.blur()
+    }
+    filterTableInput(value, [1, 3], locationsTableTbody)
+    refreshLocations()
 })
 movesInput.addEventListener("input", e => {
     const value = e.target.value
@@ -276,6 +328,10 @@ speciesButton.addEventListener("click", () => {
 abilitiesButton.addEventListener("click", () => {
     if(!abilitiesButton.classList.contains("activeButton"))
         tableButtonClick("abilities")
+})
+locationsButton.addEventListener("click", () => {
+    if(!locationsButton.classList.contains("activeButton"))
+        tableButtonClick("locations")
 })
 movesButton.addEventListener("click", () => {
     if(!movesButton.classList.contains("activeButton"))
@@ -380,6 +436,12 @@ speciesFilterBST.addEventListener("click", () => {
 
 
 
+
+
+locationsFilterType.addEventListener("click", () => {
+    const list = createOptionArray(["type1", "type2"], species)
+    createLocationsFilter(list, locations, ["BST"], filterCount++, locationsFilterButton, "Type", isInt = false, isOperator = false)
+})
 
 
 
