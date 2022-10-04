@@ -16,10 +16,10 @@ async function getRaidLocations(locations){
 
 async function buildLocationsObj(){
     let locations = {}
+
     locations = await getWildLocations(locations)
     locations = await getRaidLocations(locations)
 
-    species = await cleanSpecies(species)
 
     await localStorage.setItem("locations", LZString.compressToUTF16(JSON.stringify(locations)))
     return locations

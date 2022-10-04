@@ -186,6 +186,10 @@ async function buildSpeciesObj(){
 
 
 
+    species = await cleanSpecies(species)
+
+
+
     delete species["SPECIES_ZYGARDE_CORE"]
     delete species["SPECIES_ZYGARDE_CELL"]
     delete species["SPECIES_SHADOW_WARRIOR"]
