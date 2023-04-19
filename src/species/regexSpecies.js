@@ -34,7 +34,7 @@ function regexSpecies(textSpecies, species){
 function regexBaseStats(textBaseStats, species){
     const lines = textBaseStats.split("\n")
 
-    const regex = /baseHP|baseAttack|baseDefense|baseSpeed|baseSpAttack|baseSpDefense|type1|type2|item1|item2|eggGroup1|eggGroup2|ability1|ability2|hiddenAbility/i
+    const regex = /baseHP|baseAttack|baseDefense|baseSpeed|baseSpAttack|baseSpDefense|type1|type2|item1|item2|eggGroup1|eggGroup2|ability1|ability2|hiddenAbility/
     let change = false, value, name
 
     lines.forEach(line => {

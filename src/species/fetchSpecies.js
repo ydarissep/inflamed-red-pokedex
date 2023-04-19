@@ -116,7 +116,7 @@ async function cleanSpecies(species){
                 }
             }
         }
-        else if(name.match(/_GIGA$/i) !== null && species[name]["evolution"].toString().includes("EVO_MEGA")){
+        else if(name.match(/_GIGA$/i) && species[name]["evolution"].toString().includes("EVO_MEGA")){
             const replaceName = name.replace(/_GIGA$/i, "_MEGA")
             species[name]["name"] = replaceName
             species[name]["changes"] = []
@@ -141,17 +141,10 @@ async function cleanSpecies(species){
             species[replaceName] = species[name]
             delete species[name]
         }
-        else if(name.match(/_MEGA$|_MEGA_Y$|_MEGA_X$|_GIGA$/i) !== null){
+        else if(name.match(/_MEGA$|_MEGA_Y$|_MEGA_X$|_GIGA$/i)){
             species[name]["evolution"] = []
         }
     })
-    /*
-    Object.keys(species).forEach(name => {
-        if(species[name]["baseSpeed"] <= 0){
-            delete species[name]
-        }
-    })
-    */
     return species
 }
 
@@ -209,7 +202,6 @@ async function buildSpeciesObj(){
             return a - b
         })
     })
-
     await localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
     return species
 }
@@ -242,7 +234,6 @@ function initializeSpeciesObj(species){
         species[name]["forms"] = []
         species[name]["sprite"] = ""
     }
-
     return species
 }
 
