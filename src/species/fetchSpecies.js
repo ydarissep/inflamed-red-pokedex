@@ -45,6 +45,13 @@ async function getTutorLearnsets(species){
     return regexTutorLearnsets(textTutorLearnsets, species, "gMoveTutorMoves", "gTMHMMoves")
 }
 
+async function getTeachableLearnsets(species){
+    const rawTeachableLearnsets = await fetch(`https://raw.githubusercontent.com/${repo1}/master/src/Tables/tm_tutor_new.h`)
+    const textTeachableLearnsets = await rawTeachableLearnsets.text()
+
+    return regexTeachableLearnsets(textTeachableLearnsets, species)
+}
+
 async function getEvolution(species){
     footerP("Fetching evolution line")
     const rawEvolution = await fetch(`https://raw.githubusercontent.com/${repo2}/master/src/Evolution%20Table.c`)
@@ -170,6 +177,7 @@ async function buildSpeciesObj(){
     species = await getTMHMLearnsets(species)
     species = await getEggMovesLearnsets(species)
     species = await getTutorLearnsets(species)
+    species = await getTeachableLearnsets(species)
     species = await getSprite(species)
 
     species = await altFormsLearnsets(species, "forms", "tutorLearnsets")

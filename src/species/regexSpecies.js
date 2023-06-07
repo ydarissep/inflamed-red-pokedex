@@ -8,7 +8,7 @@ function regexSpecies(textSpecies, species){
         if(matchSpecies){
             const name = matchSpecies[1]
 
-            matchID = line.match(/0[xX][0-9a-fA-F]+/i)
+            matchID = line.match(/0[xX][0-9a-fA-F]+|\d+$/i)
             if(matchID){
                 ID = parseInt(matchID[0])
 
@@ -330,6 +330,77 @@ function regexTutorLearnsets(textTutorLearnsets, species, start, end){
 
 
 
+function regexTeachableLearnsets(textTeachableLearnsets, species){
+    const lines = textTeachableLearnsets.split("\n")
+    let conversionTable = {}, teachable = null, TM = {}, tutor = {}
+
+    lines.forEach(line => {
+        const matchSpecies = line.match(/SPECIES_\w+/i)
+        if(matchSpecies){
+            const name = matchSpecies[0]
+            const matchTeachable = line.match(/s\w+TeachableLearnset/i)
+            if(matchTeachable){
+                if(!conversionTable[matchTeachable[0]]){
+                    conversionTable[matchTeachable[0]] = []
+                }
+                conversionTable[matchTeachable[0]].push(name)
+            }
+        }
+    })
+
+    Object.keys(species).forEach(speciesName => {
+        for(let i = 0; i < species[speciesName]["TMHMLearnsets"].length; i++){
+            if(!(species[speciesName]["TMHMLearnsets"][i][0] in TM)){
+                TM[species[speciesName]["TMHMLearnsets"][i][0]] = species[speciesName]["TMHMLearnsets"][i]
+            }
+        }
+        for(let i = 0; i < species[speciesName]["tutorLearnsets"].length; i++){
+            if(!(species[speciesName]["tutorLearnsets"][i][0] in tutor)){
+                tutor[species[speciesName]["tutorLearnsets"][i][0]] = species[speciesName]["tutorLearnsets"][i]
+            }
+        }
+    })
+
+    lines.forEach(line => {
+        const matchTeachable = line.match(/s\w+TeachableLearnset/i)
+        if(matchTeachable){
+            teachable = matchTeachable[0]
+        }
+        const matchMove = line.match(/MOVE_\w+/i)
+        if(matchMove && conversionTable[teachable]){
+            const move = matchMove[0]
+            for(let i = 0; i < conversionTable[teachable].length; i++){
+                if(move in moves){
+                    if(move in TM){
+                        species[conversionTable[teachable][i]]["TMHMLearnsets"].push(TM[move])
+                    }
+                    else if(move in tutor){
+                        species[conversionTable[teachable][i]]["tutorLearnsets"].push(tutor[move])
+                    }
+                    /*
+                    else{
+                        species[conversionTable[teachable][i]]["tutorLearnsets"].push([move, 0])
+                    }
+                    */
+                }
+            }
+        }
+    })
+
+    return species
+    //return altFormsLearnsets(species, "forms", "tutorLearnsets")
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function regexEvolution(textEvolution, species){
     const lines = textEvolution.split("\n")
@@ -344,7 +415,7 @@ function regexEvolution(textEvolution, species){
 
 
         const matchEvoInfo = line.match(/(\w+), *(\w+), *(\w+)/)
-        if(matchEvoInfo){
+        if(matchEvoInfo && !/\/\//.test(line)){
             const method = matchEvoInfo[1]
             const condition = matchEvoInfo[2]
             const targetSpecies = matchEvoInfo[3]
@@ -370,8 +441,10 @@ function getEvolutionLine(species){
 
 
             for (let j = 0; j < species[name]["evolution"].length; j++){
-
-                const targetSpecies = species[name]["evolution"][j][2]
+                let targetSpecies = species[name]["evolution"][j][2]
+                if(targetSpecies === "SPECIES_BASCULEGION"){
+                    targetSpecies = "SPECIES_BASCULEGION_M"
+                }
                 species[targetSpecies]["evolutionLine"] = species[name]["evolutionLine"]
             }
         }
@@ -504,6 +577,9 @@ function regexSprite(textSprite, species){
             let name = matchSpecies[0]
             if(name === "SPECIES_ENAMORUS_T")
                 name = "SPECIES_ENAMORUS_THERIAN"
+            else if(name === "SPECIES_BASCULEGION"){
+                name = "SPECIES_BASCULEGION_M"
+            }
 
             const matchURL = line.match(/gFrontSprite\w+Tiles/i)
             if(matchURL){
@@ -538,8 +614,11 @@ function altFormsLearnsets(species, input, output){
 
 
             for (let j = 0; j < species[name][input].length; j++){
-                const targetSpecies = species[name][input][j]
-
+                let targetSpecies = species[name][input][j]
+                
+                if(targetSpecies === "SPECIES_BASCULEGION"){
+                    targetSpecies = "SPECIES_BASCULEGION_M"
+                }
                 if(species[targetSpecies][output].length < species[name][output].length){
                     species[targetSpecies][output] = species[name][output]
                 }
