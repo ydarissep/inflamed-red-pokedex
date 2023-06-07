@@ -8,7 +8,7 @@ function regexSpecies(textSpecies, species){
         if(matchSpecies){
             const name = matchSpecies[1]
 
-            matchID = line.match(/0[xX][0-9a-fA-F]+|\d+$/i)
+            matchID = line.trim().match(/0[xX][0-9a-fA-F]+|\d+$/i)
             if(matchID){
                 ID = parseInt(matchID[0])
 
