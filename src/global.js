@@ -1,7 +1,7 @@
 window.repoDex = "ydarissep/inflamed-red-pokedex"
 window.repo1 = "Greenphx9/Complete-Fire-Red-Upgrade"
 window.repo2 = "Greenphx9/Dynamic-Pokemon-Expansion"
-window.checkUpdate = "18 IR"
+window.checkUpdate = "19 IR"
 
 
 fetch('https://raw.githubusercontent.com/ydarissep/dex-core/main/index.html').then(async response => {
