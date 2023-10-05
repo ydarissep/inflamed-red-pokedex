@@ -243,14 +243,9 @@ function regexTMHMLearnsets(textTMHMLearnsets, species, start, end){
                         const lines = promises.split("\n")
 
                         lines.forEach(line => {
-                            const matchTMHM = line.match(/TM\d+|HM\d+/i)
-                            if(matchTMHM)
-                                TMHM = matchTMHM[0]
-
-
                             const matchSpecies = `SPECIES_${line.trim()}`
                             if(species[matchSpecies] !== undefined)
-                                species[matchSpecies]["TMHMLearnsets"].push([matchMove[0], TMHM])
+                                species[matchSpecies]["TMHMLearnsets"].push(matchMove[0])
                         })
                     })
                 })
@@ -299,16 +294,9 @@ function regexTutorLearnsets(textTutorLearnsets, species, start, end){
                             const lines = promises.split("\n")
 
                             lines.forEach(line => {
-                                if(line.includes(":")){
-                                    const matchTutor = line.match(/\d+/)
-                                    if(matchTutor)
-                                        tutor = matchTutor[0]
-                                }
-
-
                                 const matchSpecies = `SPECIES_${line.trim()}`
                                 if(species[matchSpecies] !== undefined)
-                                    species[matchSpecies]["tutorLearnsets"].push([matchMove[0], tutor])
+                                    species[matchSpecies]["tutorLearnsets"].push(matchMove[0])
                             })
                         })
                     })
