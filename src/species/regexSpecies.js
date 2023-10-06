@@ -421,18 +421,22 @@ async function getEvolutionLine(species){
 
         for(let i = 0; i < evolutionLine.length; i++){
             const targetSpecies = evolutionLine[i]
-            for(let j = 0; j < species[evolutionLine[i]]["evolution"].length; j++){
-                const targetSpeciesEvo = species[targetSpecies]["evolution"][j][2]
-                if(!evolutionLine.includes(targetSpeciesEvo)){
-                    evolutionLine.push(targetSpeciesEvo)
+            if(species[evolutionLine[i]]){
+                for(let j = 0; j < species[evolutionLine[i]]["evolution"].length; j++){
+                    const targetSpeciesEvo = species[targetSpecies]["evolution"][j][2]
+                    if(!evolutionLine.includes(targetSpeciesEvo)){
+                        evolutionLine.push(targetSpeciesEvo)
+                    }
                 }
             }
         }
 
         for(let i = 0; i < evolutionLine.length; i++){
             const targetSpecies = evolutionLine[i]
-            if(evolutionLine.length > species[targetSpecies]["evolutionLine"].length){
-                species[targetSpecies]["evolutionLine"] = evolutionLine
+            if(species[evolutionLine[i]]){
+                if(evolutionLine.length > species[targetSpecies]["evolutionLine"].length){
+                    species[targetSpecies]["evolutionLine"] = evolutionLine
+                }
             }
         }
     }
