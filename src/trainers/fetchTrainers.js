@@ -19,8 +19,8 @@ async function getTrainers(trainers){
 async function buildTrainersObj(){
     let trainers = {}
 
-    trainers = await getScripts(trainers)
-    trainers = await getTrainers(trainers)
+    //trainers = await getScripts(trainers)
+    //trainers = await getTrainers(trainers)
     
     trainers = await bugFixTrainers(trainers)
 
